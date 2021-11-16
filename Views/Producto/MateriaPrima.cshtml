@@ -1,0 +1,113 @@
+﻿@{
+    /***********************************************************************************************************
+        Copyright (C) 2021 ITSC - Ing. de Software
+
+        Este programa es software libre: usted puede redistribuirlo y/o modificarlo 
+        bajo los términos de la Licencia Pública General GNU publicada 
+        por la Fundación para el Software Libre, ya sea la versión 3 
+        de la Licencia, o (a su elección) cualquier versión posterior.
+
+        Este programa se distribuye con la esperanza de que sea útil, pero 
+        SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
+        MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
+        Consulte los detalles de la Licencia Pública General GNU para obtener 
+        una información más detallada. 
+
+        Debería haber recibido una copia de la Licencia Pública General GNU 
+        junto a este programa. 
+        En caso contrario, consulte http://www.gnu.org/licenses/gpl-3.0.html
+    **********************************************************************************************************/
+}
+
+@model ejemplo.Models.vista.ModeloVistaMateriaPrima
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Materia prima";
+}
+
+<input type="hidden" id="txt_id" value="@Model.Id" />
+
+<div class="form-group">
+    <label class="form-label" for="txt_descripcion">Nombre</label>
+    <input  type="text" 
+            id="txt_descripcion" 
+            class="form-control" 
+            placeholder="Ingrese el nombre del producto" 
+            autofocus="autofocus"
+            value="@Model.Descripcion" />
+</div>
+
+<div class="form-group">
+    <label class="form-label" for="txt_precio">Precio</label>
+    <input  type="text" 
+            id="txt_precio" 
+            class="form-control" 
+            placeholder="Ingrese el precio del producto" 
+            autofocus="autofocus"
+            value="@Model.Precio" />
+</div>
+
+<div class="form-group">
+    <label class="form-label" for="txt_cantidad">Cantidad</label>
+    <input  type="text" 
+            id="txt_cantidad" 
+            class="form-control" 
+            placeholder="Ingrese la cantidad del producto" 
+            autofocus="autofocus"
+            value="@Model.Cantidad" />
+</div>
+
+<div class="form-group">
+    <label class="form-label" for="cmb_unidad_medida">Unidad de medida</label>
+    <select id="cmb_unidad_medida" class="form-control"></select>
+</div>
+
+<div class="form-group">
+    <label class="form-label" for="txt_procentaje_ganancia">Ganancia</label>
+    <input  type="text" 
+            id="txt_porcentaje_ganancia" 
+            class="form-control" 
+            placeholder="Ingrese el porcentaje de ganancia" 
+            autofocus="autofocus"
+            value="@Model.PorcentajeGanancia" />
+</div>
+
+<br><br>
+
+<center>
+    <button class="btn btn-primary"
+            style="background-color: #28a745;color:white;"
+            id="btn_guardar">
+        Enviar
+    </button>
+</center>
+
+<script>
+    $(document).ready(function(){
+        crearCombo('#cmb_unidad_medida', urlContent + 'UnidadMedida/ListarUnidadMedidaCombo', {});
+        definirValorCombo('#cmb_unidad_medida', @Model.IdUnidadMedida, '@Model.UnidadMedida');
+    });
+
+    $("#btn_guardar").click(function()
+    {
+        var data = {
+            id: $("#txt_id").val(),
+            descripcion: $("#txt_descripcion").val(),
+            idUnidadMedida: $("#cmb_unidad_medida").val(),
+            precio: $("#txt_precio").val(),
+            cantidad: $("#txt_cantidad").val(),
+            porcentajeGanancia: $("#txt_porcentaje_ganancia").val()
+        };
+
+        ajax(
+            "POST", 
+            urlContent + "Producto/GuardarMateriaPrima", 
+            data, 
+            "Guardando materia prima", 
+            "Espere por favor...", 
+            function (){
+                window.location = urlContent + "Producto";
+            }, null);
+    });
+</script>

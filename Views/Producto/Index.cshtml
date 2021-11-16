@@ -1,0 +1,138 @@
+﻿@{
+    /***********************************************************************************************************
+        Copyright (C) 2021 ITSC - Ing. de Software
+
+        Este programa es software libre: usted puede redistribuirlo y/o modificarlo 
+        bajo los términos de la Licencia Pública General GNU publicada 
+        por la Fundación para el Software Libre, ya sea la versión 3 
+        de la Licencia, o (a su elección) cualquier versión posterior.
+
+        Este programa se distribuye con la esperanza de que sea útil, pero 
+        SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
+        MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
+        Consulte los detalles de la Licencia Pública General GNU para obtener 
+        una información más detallada. 
+
+        Debería haber recibido una copia de la Licencia Pública General GNU 
+        junto a este programa. 
+        En caso contrario, consulte http://www.gnu.org/licenses/gpl-3.0.html
+    **********************************************************************************************************/
+}
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Productos";
+}
+
+<a  href="@Url.Content("~/Producto/NuevaMateriaPrima")" 
+    class="btn btn-primary"
+    style="background-color: #28a745;color:white;">
+    Nueva materia prima
+</a>
+
+<a  href="@Url.Content("~/Producto/NuevoProductoElaborado")" 
+    class="btn btn-primary"
+    style="background-color: #28a745;color:white;margin-left:10px">
+    Nuevo producto elaborado
+</a>
+
+<br><br>
+
+<div class="row" id="tabla_productos">
+    <div class="col">
+        <table 
+            class="table table-striped table-borderer" 
+            id="grilla_productos" 
+            style="100%">
+            
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Unidad medida</th>
+                    <th scope="col">Precio compra</th>
+                    <th scope="col">Precio venta</th>
+                    <th scope="col">Ganancia</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        var columnas = [{
+            "data": "descripcionProducto",
+            "sercheable": true,
+            "visible": true,
+            "orderable": true,
+            defaultContent: ""
+        }, {
+            "data": "cantidad",
+            "sercheable": true,
+            "visible": true,
+            "orderable": true,
+            defaultContent: ""
+        }, {
+            "data": "descripcionUnidadMedida",
+            "sercheable": true,
+            "visible": true,
+            "orderable": true,
+            defaultContent: ""
+        }, {
+            "data": "precioCompra",
+            "sercheable": false,
+            "visible": true,
+            "orderable": false,
+            defaultContent: ""
+        }, {
+            "data": "precioVenta",
+            "sercheable": false,
+            "visible": true,
+            "orderable": false,
+            defaultContent: ""
+        }, {
+            "data": "porcentajeGanancia",
+            "sercheable": true,
+            "visible": true,
+            "orderable": true,
+            defaultContent: ""
+        }, {
+            "data": function(row, type, set){
+                let s = `<div>`;
+                
+                if(row.tipo == "MateriaPrima")
+                {
+                    s +=   `<a  id='editar_${row.id}' 
+                                type='button' 
+                                class='btn btn-sm btn-secondary mr-1' 
+                                href='${urlContent}Producto/EditarMateriaPrima/${row.id}'>
+                                
+                                <svg class="c-icon">
+                                    <use xlink: 
+                                        href="${urlContent}img/icons/svg/free.svg#cil-pencil">
+                                    </use>
+                                </svg>
+                            </a>`;
+                }
+                s += `</div>`;
+                return s;
+            },
+            "sercheable": false,
+            "visible": true,
+            "orderable": false
+        }];
+
+        crearGrilla(
+            "#grilla_productos", 
+            "Producto/ListarProductosPaginado", 
+            "Producto", 
+            columnas, 
+            null, 
+            true);
+    });
+</script>

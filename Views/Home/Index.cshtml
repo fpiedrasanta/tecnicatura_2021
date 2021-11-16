@@ -1,0 +1,75 @@
+﻿@{
+    /***********************************************************************************************************
+        Copyright (C) 2021 ITSC - Ing. de Software
+
+        Este programa es software libre: usted puede redistribuirlo y/o modificarlo 
+        bajo los términos de la Licencia Pública General GNU publicada 
+        por la Fundación para el Software Libre, ya sea la versión 3 
+        de la Licencia, o (a su elección) cualquier versión posterior.
+
+        Este programa se distribuye con la esperanza de que sea útil, pero 
+        SIN GARANTÍA ALGUNA; ni siquiera la garantía implícita 
+        MERCANTIL o de APTITUD PARA UN PROPÓSITO DETERMINADO. 
+        Consulte los detalles de la Licencia Pública General GNU para obtener 
+        una información más detallada. 
+
+        Debería haber recibido una copia de la Licencia Pública General GNU 
+        junto a este programa. 
+        En caso contrario, consulte http://www.gnu.org/licenses/gpl-3.0.html
+    **********************************************************************************************************/
+}
+
+@model ejemplo.Models.vista.ModeloVistaLogin
+@{
+    Layout = "_LayoutLogin";
+    ViewData["Title"] = "EVA - Alfajores Veganos";
+}
+
+<div class="d-flex align-items-center min-vh-100">
+    <div class="container text-center" style="margin-top:-15px;">
+        <div class="row justify-content-around">
+            <div class="col-sm-12 col-md-8">
+                <div class="card p-3">
+                    <form action="@Url.Content("~/Home/Login/")" method="POST">
+                        <h3>Ingresar</h3>
+
+                        <div class="form-group text-left">
+                            <label for="txt_nombre_usuario">
+                                Nombre de usuario
+                            </label>
+                            <input
+                                class="form-control"
+                                type="text"
+                                id="txt_nombre_usuario"
+                                name="nombreUsuario"
+                                value="@Model.NombreUsuario"
+                                placeholder="Nombre de usuario">
+                        </div>
+
+                        <div class="form-group text-left">
+                            <label for="txt_password">
+                                Contraseña
+                            </label>
+                            <input
+                                class="form-control"
+                                type="password"
+                                id="txt_password"
+                                name="password"
+                                value=""
+                                placeholder="Contraseña">
+                        </div>
+
+                        @if(Model.TieneError)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @Html.Raw(Model.MensajeError)
+                            </div>
+                        }
+
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
