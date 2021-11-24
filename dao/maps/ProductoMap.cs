@@ -47,7 +47,6 @@ namespace ejemplo.dao.producto
         public MateriaPrimaMap()
         {
             DiscriminatorValue("MateriaPrima");
-
             Map(x => x.Precio);
         }
     }
