@@ -30,7 +30,7 @@ namespace ejemplo.dao.producto
             
             Map(x => x.Cantidad);
             Map(x => x.Descripcion);
-            Map(x => x.PorcentajeGanancia);
+            Map(x => x.PorcentajeGanancia)
             
             References(x => x.UnidadMedida, "IdUnidadMedida");
 
