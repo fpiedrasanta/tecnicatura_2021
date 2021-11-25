@@ -2,7 +2,7 @@ using ejemplo.entities.producto;
 using FluentNHibernate.Mapping;
 
 /***********************************************************************************************************
-    Copyright (C) 2021 ITSC - Ing. de Software
+    Copyright (C) 2021 ITSC - Ingeniería de Software
 
     Este programa es software libre: usted puede redistribuirlo y/o modificarlo 
     bajo los términos de la Licencia Pública General GNU publicada 
