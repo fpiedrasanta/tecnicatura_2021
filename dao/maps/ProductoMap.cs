@@ -35,7 +35,6 @@ namespace ejemplo.dao.producto
             Map(x => x.PorcentajeGanancia);
             
             References(x => x.UnidadMedida, "IdUnidadMedida");
-
             DiscriminateSubClassesOnColumn("discriminador")
                 .AlwaysSelectWithValue()
                 .Length(20)
