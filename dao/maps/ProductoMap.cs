@@ -28,9 +28,9 @@ namespace ejemplo.dao.producto
         {
             Id(x => x.Id).GeneratedBy.Increment();
             
-            Map(x => x.Cantidad);
-
             Map(x => x.Descripcion);
+
+            Map(x => x.Cantidad);
             
             Map(x => x.PorcentajeGanancia);
             
